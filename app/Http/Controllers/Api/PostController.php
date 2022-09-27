@@ -17,11 +17,14 @@ class PostController extends Controller
     {
         // $posts = Post::all();
         // ? Questo ci permette di passare anche l'user di ogni post, chiaramente non anche la password, è protetta nel model user!
-        $posts = Post::with('user')->get();
+        // $posts = Post::with('user')->get();
+
+        // ? Ed anche paginare, che ci darà current page, next e last page "next_page_url": "http://127.0.0.1:8000/api/posts?page=2",
+        $posts = Post::with('user')->paginate(10);
 
         return response()->json([
             "success" => true,
-            "count" => count($posts),
+            // "count" => count($posts),
             "data" => $posts,
         ]);
     }
