@@ -2067,14 +2067,11 @@ var render = function render() {
     staticClass: "card-body"
   }, [_c("h5", {
     staticClass: "card-title"
-  }, [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _c("p", {
+  }, [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _c("h5", {
+    staticClass: "card-title"
+  }, [_vm._v("Scritto da: " + _vm._s(_vm.post.user.name))]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
-  }, [_vm._v(_vm._s(_vm.post.description))]), _vm._v(" "), _c("a", {
-    staticClass: "btn btn-primary",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v("Go somewhere")])])]);
+  }, [_vm._v(_vm._s(_vm.post.description))])])]);
 };
 
 var staticRenderFns = [];
