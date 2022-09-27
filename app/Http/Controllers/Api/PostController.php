@@ -15,7 +15,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        // $posts = Post::all();
+        // ? Questo ci permette di passare anche l'user di ogni post, chiaramente non anche la password, è protetta nel model user!
+        $posts = Post::with('user')->get();
 
         return response()->json([
             "success" => true,
@@ -57,22 +59,25 @@ class PostController extends Controller
         // $post = Post::find($id);
         // ! Se è stato trovato, manda il dato, altrimenti 404. E' findOrFail ma manuale per poter dare la 404.
         // ! Con find or fail funzionerebbe allo stesso modo, ma restituisce l'intera pagina di 404, rallentando il tutto
-        // if($post){
-        //     return response()->json([
-        //         "success" => true,
-        //         "data" => $post,
-        //     ]);
-        // }else{
-        //     return response('', 404);
-        // }
+        // ? insieme a with, possiamo mandare altre informazioni, vengono definite eager loading
+        $post = Post::with('user')->find($id);
+
+        if($post){
+            return response()->json([
+                "success" => true,
+                "data" => $post,
+            ]);
+        }else{
+            return response('', 404);
+        }
 
         // ! Esempio con find or fail dove restituisce l'intero blade
-        $post = Post::findOrFail($id);
+        // $post = Post::findOrFail($id);
 
-        return response()->json([
-            "success" => true,
-            "data" => $post,
-        ]);
+        // return response()->json([
+        //     "success" => true,
+        //     "data" => $post,
+        // ]);
     }
 
     /**
