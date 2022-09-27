@@ -1,15 +1,25 @@
 <template>
   <div>
-    <h1>ciao</h1>
+    <h1>
+      Posts:
+    </h1>
+
+    <Main />
+
   </div>
 </template>
 
 <script>
-export default {
 
+import Main from './components/Main.vue';
+
+export default {
+  components:{
+    Main,
+  },
 }
 </script>
 
-<style>
+<style lang="scss">
 
 </style>
