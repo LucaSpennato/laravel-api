@@ -1,10 +1,19 @@
 <template>
-  <h1>ciao</h1>
+  <div>
+    <ul>
+        <li>
+            {{ post.user.name }}
+        </li>
+        <li>
+           {{ post.id }} - {{ post.title }}
+        </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 export default {
-
+    props: ['post'], 
 }
 </script>
 

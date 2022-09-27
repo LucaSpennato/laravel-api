@@ -2,7 +2,7 @@
   <main>
     <div class="container">
         <div class="row">
-            <card />
+            <card v-for="post in posts" :key="post.id" :post="post"/>
         </div>
     </div>
   </main>
@@ -31,6 +31,7 @@ export default {
       axios.get('/api/posts', {page: currentPage })
       .then((response) => {
         console.warn(response.data.results.data);
+        this.posts = response.data.results.data;
       }).catch((error) =>{
         console.error(error);
       })
@@ -39,6 +40,7 @@ export default {
 
   created(){
     this.getPosts();
+    console.log(this.posts);
   },
 }
 </script>

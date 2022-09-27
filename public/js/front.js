@@ -1946,10 +1946,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getPosts: function getPosts(currentPage) {
+      var _this = this;
+
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/posts', {
         page: currentPage
       }).then(function (response) {
         console.warn(response.data.results.data);
+        _this.posts = response.data.results.data;
       })["catch"](function (error) {
         console.error(error);
       });
@@ -1957,6 +1960,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.getPosts();
+    console.log(this.posts);
   }
 });
 
@@ -1971,7 +1975,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['post']
+});
 
 /***/ }),
 
@@ -2018,7 +2024,14 @@ var render = function render() {
     staticClass: "container"
   }, [_c("div", {
     staticClass: "row"
-  }, [_c("card")], 1)])]);
+  }, _vm._l(_vm.posts, function (post) {
+    return _c("card", {
+      key: post.id,
+      attrs: {
+        post: post
+      }
+    });
+  }), 1)])]);
 };
 
 var staticRenderFns = [];
@@ -2042,7 +2055,7 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("h1", [_vm._v("ciao")]);
+  return _c("div", [_c("ul", [_c("li", [_vm._v("\n          " + _vm._s(_vm.post.user.name) + "\n      ")]), _vm._v(" "), _c("li", [_vm._v("\n         " + _vm._s(_vm.post.id) + " - " + _vm._s(_vm.post.title) + "\n      ")])])]);
 };
 
 var staticRenderFns = [];
