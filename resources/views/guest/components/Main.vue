@@ -20,7 +20,7 @@ export default {
     data: function(){
     return{
       posts: [],
-      currentPage: 1,
+      currentPage: 3,
       nextPage: '',
       previousPage: '',
     }

@@ -1939,7 +1939,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       posts: [],
-      currentPage: 1,
+      currentPage: 3,
       nextPage: '',
       previousPage: ''
     };
@@ -2055,7 +2055,29 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("ul", [_c("li", [_vm._v("\n          " + _vm._s(_vm.post.user.name) + "\n      ")]), _vm._v(" "), _c("li", [_vm._v("\n         " + _vm._s(_vm.post.id) + " - " + _vm._s(_vm.post.title) + "\n      ")])])]);
+  return _c("div", [_c("div", {
+    staticClass: "card",
+    staticStyle: {
+      width: "18rem"
+    }
+  }, [_c("img", {
+    staticClass: "card-img-top",
+    attrs: {
+      src: _vm.post.post_image,
+      alt: _vm.post.user.author + "'s image"
+    }
+  }), _vm._v(" "), _c("div", {
+    staticClass: "card-body"
+  }, [_c("h5", {
+    staticClass: "card-title"
+  }, [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _c("p", {
+    staticClass: "card-text"
+  }, [_vm._v(_vm._s(_vm.post.description))]), _vm._v(" "), _c("a", {
+    staticClass: "btn btn-primary",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("Go somewhere")])])])]);
 };
 
 var staticRenderFns = [];
