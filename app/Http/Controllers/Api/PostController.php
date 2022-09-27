@@ -25,7 +25,7 @@ class PostController extends Controller
         return response()->json([
             "success" => true,
             // "count" => count($posts),
-            "data" => $posts,
+            "results" => $posts,
         ]);
     }
 
