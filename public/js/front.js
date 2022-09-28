@@ -1950,7 +1950,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      posts: [],
+      gettedElements: [],
       url: 'http://127.0.0.1:8000/api/',
       topic: 'tags',
       currentPage: 1,
@@ -1968,7 +1968,12 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         console.warn(response.data.results);
-        _this.posts = response.data.results.data;
+
+        if (_this.arePosts) {
+          _this.gettedElements = response.data.results.data;
+        }
+
+        _this.gettedElements = response.data.results;
       })["catch"](function (error) {
         console.error(error);
       });
@@ -1990,7 +1995,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['tag']
+});
 
 /***/ }),
 
@@ -2050,18 +2057,21 @@ var render = function render() {
 
   return _c("main", [_c("div", {
     staticClass: "container"
-  }, [_vm.arePosts ? _c("div", {
-    staticClass: "row"
-  }, [_c("h1", [_vm._v("\n          Posts:\n        ")]), _vm._v(" "), _vm._l(_vm.posts, function (post) {
+  }, [_vm.arePosts ? _c("div", [_c("h1", [_vm._v("\n          Posts:\n        ")]), _vm._v(" "), _vm._l(_vm.gettedElements, function (post) {
     return _c("card", {
       key: post.id,
       attrs: {
         post: post
       }
     });
-  })], 2) : _c("div", {
-    staticClass: "row"
-  }, [_c("h1", [_vm._v("\n          Tags:\n        ")]), _vm._v(" "), _c("TagsCard")], 1)])]);
+  })], 2) : _c("div", [_c("h1", [_vm._v("\n          Tags:\n        ")]), _vm._v(" "), _vm._l(_vm.gettedElements, function (tag) {
+    return _c("TagsCard", {
+      key: tag.id,
+      attrs: {
+        tag: tag
+      }
+    });
+  })], 2)])]);
 };
 
 var staticRenderFns = [];
@@ -2085,7 +2095,13 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div");
+  return _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-6 offset-3"
+  }, [_c("div", {
+    staticClass: "text-center fs-1 text-danger"
+  }, [_vm._v("\n          " + _vm._s(_vm.tag.name) + "\n      ")])])]);
 };
 
 var staticRenderFns = [];
@@ -2110,6 +2126,8 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
     staticClass: "card col-2 m-2"
   }, [_c("img", {
     staticClass: "card-img-top",
@@ -2125,7 +2143,7 @@ var render = function render() {
     staticClass: "card-title"
   }, [_vm._v("Scritto da: " + _vm._s(_vm.post.user.name))]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
-  }, [_vm._v(_vm._s(_vm.post.description))])])]);
+  }, [_vm._v(_vm._s(_vm.post.description))])])])]);
 };
 
 var staticRenderFns = [];

@@ -1,17 +1,17 @@
 <template>
   <main>
     <div class="container">
-        <div class="row" v-if="arePosts">
+        <div v-if="arePosts">
           <h1>
             Posts:
           </h1>
-            <card v-for="post in posts" :key="post.id" :post="post"/>
+            <card v-for="post in gettedElements" :key="post.id" :post="post"/>
         </div>
-        <div class="row" v-else>
+        <div v-else>
           <h1>
             Tags:
           </h1>
-          <TagsCard />
+          <TagsCard v-for="tag in gettedElements" :key="tag.id" :tag="tag"/>
         </div>
     </div>
   </main>
@@ -39,7 +39,7 @@ export default {
 
     data: function(){
     return{
-      posts: [],
+      gettedElements: [],
       url: 'http://127.0.0.1:8000/api/',
       topic : 'tags',
       currentPage: 1,
@@ -59,7 +59,11 @@ export default {
         )
       .then((response) => {
         console.warn(response.data.results);
-        this.posts = response.data.results.data;
+        if(this.arePosts){
+          this.gettedElements = response.data.results.data;
+        }
+        this.gettedElements = response.data.results;
+
       }).catch((error) =>{
         console.error(error);
       })
