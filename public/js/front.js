@@ -1952,7 +1952,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       gettedElements: [],
       url: 'http://127.0.0.1:8000/api/',
-      topic: '',
+      topic: 'posts',
       currentPage: 1,
       nextPage: '',
       previousPage: '',
@@ -1990,8 +1990,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  created: function created() {// this.getPosts();
-    // this.getTags();
+  created: function created() {
+    this.getPosts(); // this.getTags();
   }
 });
 

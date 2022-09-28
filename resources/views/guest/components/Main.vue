@@ -54,7 +54,7 @@ export default {
     return{
       gettedElements: [],
       url: 'http://127.0.0.1:8000/api/',
-      topic : '',
+      topic : 'posts',
       currentPage: 1,
       nextPage: '',
       previousPage: '',
@@ -102,7 +102,7 @@ export default {
   },
 
   created(){
-    // this.getPosts();
+    this.getPosts();
     // this.getTags();
   },
 }
