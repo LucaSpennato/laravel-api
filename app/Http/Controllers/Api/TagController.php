@@ -52,7 +52,16 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        //
+        $tag = Tag::find($id);
+
+        if($tag){
+            return response()->json([
+                "success" => true,
+                "results" => $tag,
+            ]);
+        }else{
+            return response('', 404);
+        }
     }
 
     /**
