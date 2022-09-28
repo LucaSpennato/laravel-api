@@ -1990,9 +1990,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  created: function created() {
-    this.getPosts();
-    this.getTags();
+  created: function created() {// this.getPosts();
+    // this.getTags();
   }
 });
 
@@ -2101,7 +2100,7 @@ var render = function render() {
         return _vm.modify();
       }]
     }
-  }, [_c("option", [_vm._v("tags")]), _vm._v(" "), _c("option", [_vm._v("posts")])])])]), _vm._v(" "), _vm.arePosts ? _c("div", [_c("h1", [_vm._v("\n          Posts:\n        ")]), _vm._v(" "), _vm._l(_vm.gettedElements, function (post, index) {
+  }, [_c("option", [_vm._v("posts")]), _vm._v(" "), _c("option", [_vm._v("tags")])])])]), _vm._v(" "), _vm.arePosts ? _c("div", [_c("h1", [_vm._v("\n          Posts:\n        ")]), _vm._v(" "), _vm._l(_vm.gettedElements, function (post, index) {
     return _c("card", {
       key: index,
       attrs: {
@@ -2186,7 +2185,7 @@ var render = function render() {
     staticClass: "card-img-top",
     attrs: {
       src: _vm.post.post_image,
-      alt: _vm.post.user.author + "'s image"
+      alt: _vm.post.user.name + "'s image"
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "card-body"
@@ -2194,9 +2193,13 @@ var render = function render() {
     staticClass: "card-title"
   }, [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _c("h5", {
     staticClass: "card-title"
-  }, [_vm._v("Scritto da: " + _vm._s(_vm.post.user.name))]), _vm._v(" "), _c("p", {
-    staticClass: "card-text"
-  }, [_vm._v(_vm._s(_vm.post.description))])])]);
+  }, [_vm._v("Scritto da: " + _vm._s(_vm.post.user.name))]), _vm._v(" "), _c("h5", {
+    staticClass: "card-title"
+  }, [_vm._v("\n            Tags: \n            "), _vm._l(_vm.post.tags, function (tag) {
+    return _c("span", {
+      key: tag.id
+    }, [_vm._v("\n                " + _vm._s(tag.name) + "\n            ")]);
+  })], 2)])]);
 };
 
 var staticRenderFns = [];

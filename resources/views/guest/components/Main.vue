@@ -6,8 +6,8 @@
         <div class="col-4">
           <label for="call">Select the call</label>
           <select class="form-select" id="call" v-model="topic" @change="modify()">
-            <option>tags</option>
             <option>posts</option>
+            <option>tags</option>
           </select>
         </div>
       </div>
@@ -102,8 +102,8 @@ export default {
   },
 
   created(){
-    this.getPosts();
-    this.getTags();
+    // this.getPosts();
+    // this.getTags();
   },
 }
 </script>
