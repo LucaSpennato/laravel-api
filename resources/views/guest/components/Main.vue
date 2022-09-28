@@ -20,7 +20,7 @@ export default {
     data: function(){
     return{
       posts: [],
-      currentPage: 3,
+      currentPage: 10,
       nextPage: '',
       previousPage: '',
     }
@@ -28,7 +28,11 @@ export default {
 
   methods:{
     getPosts(currentPage){
-      axios.get('/api/posts', {page: currentPage })
+      axios.get('http://127.0.0.1:8000/api/posts?', {
+        params:{
+          page : this.currentPage
+          }
+        })
       .then((response) => {
         console.warn(response.data.results.data);
         this.posts = response.data.results.data;

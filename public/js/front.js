@@ -1939,7 +1939,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       posts: [],
-      currentPage: 3,
+      currentPage: 10,
       nextPage: '',
       previousPage: ''
     };
@@ -1948,8 +1948,10 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts(currentPage) {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/posts', {
-        page: currentPage
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://127.0.0.1:8000/api/posts?', {
+        params: {
+          page: this.currentPage
+        }
       }).then(function (response) {
         console.warn(response.data.results.data);
         _this.posts = response.data.results.data;
