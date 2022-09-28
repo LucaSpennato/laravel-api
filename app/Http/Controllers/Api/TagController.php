@@ -17,6 +17,8 @@ class TagController extends Controller
     {
         // ! è possibile fare il classico giro con la dot notation tra le relazioni per sfruttarle
         // ! in questo caso prendiamo anche gli user dei post grazie alla loro relazione!
+        // ! in questo caso facciamo il gito posts.user, user singolare in quanto è una many to one, basta controllare il model!
+        // ! nel caso in cui sia una many to many chiaramente va al prurale, sempre in accordo a quanto scritto nel model
         $tags = Tag::with('posts', 'posts.user')->get();
 
         return response()->json([
