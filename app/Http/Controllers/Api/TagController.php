@@ -15,7 +15,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::with('posts')->get();
+        // ! è possibile fare il classico giro con la dot notation tra le relazioni per sfruttarle
+        // ! in questo caso prendiamo anche gli user dei post grazie alla loro relazione!
+        $tags = Tag::with('posts', 'posts.user')->get();
 
         return response()->json([
             "success" => true,

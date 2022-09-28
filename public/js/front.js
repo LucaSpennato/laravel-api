@@ -2101,7 +2101,16 @@ var render = function render() {
     staticClass: "col-6 offset-3"
   }, [_c("div", {
     staticClass: "text-center fs-1 text-danger"
-  }, [_vm._v("\n          " + _vm._s(_vm.tag.name) + "\n      ")])])]);
+  }, [_vm._v("\n          " + _vm._s(_vm.tag.name) + "\n      ")]), _vm._v(" "), _c("ul", {
+    staticClass: "list-group"
+  }, [_c("li", {
+    staticClass: "list-group-item"
+  }, [_vm._v("Posts in " + _vm._s(_vm.tag.name) + " tag:")]), _vm._v(" "), _vm._l(_vm.tag.posts, function (post) {
+    return _c("li", {
+      key: post.id,
+      staticClass: "list-group-item"
+    }, [_vm._v("\n              " + _vm._s(post.title) + " - Author: " + _vm._s(post.user.name) + "\n          ")]);
+  })], 2)])]);
 };
 
 var staticRenderFns = [];
