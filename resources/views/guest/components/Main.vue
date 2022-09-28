@@ -20,15 +20,17 @@ export default {
     data: function(){
     return{
       posts: [],
-      currentPage: 10,
+      url: 'http://127.0.0.1:8000/api/',
+      topic : 'posts',
+      currentPage: 1,
       nextPage: '',
       previousPage: '',
     }
   },
 
   methods:{
-    getPosts(currentPage){
-      axios.get('http://127.0.0.1:8000/api/posts?', {
+    getPosts(){
+      axios.get(this.url + this.topic, {
         params:{
           page : this.currentPage
           }
@@ -44,7 +46,6 @@ export default {
 
   created(){
     this.getPosts();
-    console.log(this.posts);
   },
 }
 </script>
