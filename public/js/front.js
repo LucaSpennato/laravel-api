@@ -1950,7 +1950,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      gettedElements: [],
+      posts: [],
+      tags: [],
       url: 'http://127.0.0.1:8000/api/',
       topic: 'posts',
       currentPage: 1,
@@ -1973,7 +1974,8 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.url + this.topic).then(function (response) {
         console.log(_this.topic);
         console.warn(response.data);
-        _this.gettedElements = response.data.results;
+        _this.tags = response.data.results;
+        _this.isLoaded = true;
       })["catch"](function (error) {
         console.error(error);
       });
@@ -1984,14 +1986,16 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.url + this.topic).then(function (response) {
         console.log(_this2.topic);
         console.warn(response.data.results.data);
-        _this2.gettedElements = response.data.results.data;
+        _this2.posts = response.data.results.data;
+        _this2.isLoaded = true;
       })["catch"](function (error) {
         console.error(error);
       });
     }
   },
   created: function created() {
-    this.getPosts(); // this.getTags();
+    this.getTags();
+    this.getPosts();
   }
 });
 
@@ -2066,7 +2070,7 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("main", [_c("div", {
+  return _c("main", [_vm.isLoaded ? _c("div", {
     staticClass: "container"
   }, [_c("div", {
     staticClass: "row"
@@ -2100,7 +2104,9 @@ var render = function render() {
         return _vm.modify();
       }]
     }
-  }, [_c("option", [_vm._v("posts")]), _vm._v(" "), _c("option", [_vm._v("tags")])])])]), _vm._v(" "), _vm.arePosts ? _c("div", [_c("h1", [_vm._v("\n          Posts:\n        ")]), _vm._v(" "), _vm._l(_vm.gettedElements, function (post, index) {
+  }, [_c("option", [_vm._v("posts")]), _vm._v(" "), _c("option", [_vm._v("tags")])])])]), _vm._v(" "), _vm.arePosts ? _c("div", {
+    staticClass: "row"
+  }, [_c("h1", [_vm._v("\n          Posts:\n        ")]), _vm._v(" "), _vm._l(_vm.posts, function (post, index) {
     return _c("card", {
       key: index,
       attrs: {
@@ -2109,14 +2115,16 @@ var render = function render() {
     });
   })], 2) : _c("div", {
     staticClass: "row"
-  }, [_c("h1", [_vm._v("\n          Tags:\n        ")]), _vm._v(" "), _vm._l(_vm.gettedElements, function (tag) {
+  }, [_c("h1", [_vm._v("\n          Tags:\n        ")]), _vm._v(" "), _vm._l(_vm.tags, function (tag) {
     return _c("TagsCard", {
       key: tag.id,
       attrs: {
         tag: tag
       }
     });
-  })], 2)])]);
+  })], 2)]) : _c("div", {
+    staticClass: "text-center text-warning display-1"
+  }, [_vm._v("\n    Caricamento\n  ")])]);
 };
 
 var staticRenderFns = [];

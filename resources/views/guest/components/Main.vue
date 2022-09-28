@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="container">
+    <div class="container" v-if="isLoaded">
       <div class="row">
 
         <div class="col-4">
@@ -12,18 +12,21 @@
         </div>
       </div>
 
-        <div v-if="arePosts">
+        <div class="row" v-if="arePosts">
           <h1>
             Posts:
           </h1>
-            <card v-for="(post, index) in gettedElements" :key="index" :post="post"/>
+            <card v-for="(post, index) in posts" :key="index" :post="post"/>
         </div>
         <div class="row" v-else>
           <h1>
             Tags:
           </h1>
-          <TagsCard v-for="tag in gettedElements" :key="tag.id" :tag="tag"/>
+          <TagsCard v-for="tag in tags" :key="tag.id" :tag="tag"/>
         </div>
+    </div>
+    <div class="text-center text-warning display-1" v-else>
+      Caricamento
     </div>
 
   </main>
@@ -52,7 +55,8 @@ export default {
 
     data: function(){
     return{
-      gettedElements: [],
+      posts: [],
+      tags: [],
       url: 'http://127.0.0.1:8000/api/',
       topic : 'posts',
       currentPage: 1,
@@ -78,8 +82,8 @@ export default {
       .then((response) => {
         console.log(this.topic);
         console.warn(response.data);
-
-        this.gettedElements = response.data.results;
+        this.tags = response.data.results;
+        this.isLoaded = true;
         
       }).catch((error) =>{
         console.error(error);
@@ -89,9 +93,10 @@ export default {
       axios.get(this.url + this.topic,
       )
       .then((response) => {
-         console.log(this.topic);
+        console.log(this.topic);
         console.warn(response.data.results.data);
-        this.gettedElements = response.data.results.data;
+        this.posts = response.data.results.data;
+        this.isLoaded = true;
 
       }).catch((error) =>{
         console.error(error);
@@ -102,8 +107,8 @@ export default {
   },
 
   created(){
+    this.getTags();
     this.getPosts();
-    // this.getTags();
   },
 }
 </script>
