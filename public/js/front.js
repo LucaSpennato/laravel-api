@@ -1954,13 +1954,19 @@ __webpack_require__.r(__webpack_exports__);
       tags: [],
       url: 'http://127.0.0.1:8000/api/',
       topic: 'posts',
-      currentPage: 1,
+      currentPage: null,
       nextPage: '',
       previousPage: '',
+      lastPage: '',
       isLoaded: false
     };
   },
   methods: {
+    log: function log(stuff) {
+      console.log(stuff);
+      this.currentPage = stuff;
+      this.getPosts();
+    },
     modify: function modify() {
       if (this.arePosts === true) {
         this.getPosts();
@@ -1983,10 +1989,16 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.url + this.topic).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.url + this.topic + '?', {
+        params: {
+          page: this.currentPage
+        }
+      }).then(function (response) {
         console.log(_this2.topic);
-        console.warn(response.data.results.data);
+        console.error(response.data.results);
         _this2.posts = response.data.results.data;
+        _this2.lastPage = parseInt(response.data.results.last_page);
+        console.log(_this2.lastPage);
         _this2.isLoaded = true;
       })["catch"](function (error) {
         console.error(error);
@@ -2075,7 +2087,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-4"
+    staticClass: "col-4 m-auto text-center my-5"
   }, [_c("label", {
     attrs: {
       "for": "call"
@@ -2105,8 +2117,22 @@ var render = function render() {
       }]
     }
   }, [_c("option", [_vm._v("posts")]), _vm._v(" "), _c("option", [_vm._v("tags")])])])]), _vm._v(" "), _vm.arePosts ? _c("div", {
-    staticClass: "row"
-  }, [_c("h1", [_vm._v("\n          Posts:\n        ")]), _vm._v(" "), _vm._l(_vm.posts, function (post, index) {
+    staticClass: "row py-2 justify-content-center"
+  }, [_c("h1", {
+    staticClass: "text-center py-2"
+  }, [_vm._v("\n          Posts:\n        ")]), _vm._v(" "), _c("div", {
+    staticClass: "col-12 text-center py-3"
+  }, _vm._l(_vm.lastPage, function (index) {
+    return _c("span", {
+      key: index,
+      staticClass: "btn btn-primary mx-1 d-inline-block text-light",
+      on: {
+        click: function click($event) {
+          return _vm.log(index);
+        }
+      }
+    }, [_vm._v("\n              " + _vm._s(index) + "\n            ")]);
+  }), 0), _vm._v(" "), _vm._l(_vm.posts, function (post, index) {
     return _c("card", {
       key: index,
       attrs: {
@@ -2115,7 +2141,9 @@ var render = function render() {
     });
   })], 2) : _c("div", {
     staticClass: "row"
-  }, [_c("h1", [_vm._v("\n          Tags:\n        ")]), _vm._v(" "), _vm._l(_vm.tags, function (tag) {
+  }, [_c("h1", {
+    staticClass: "text-center py-2"
+  }, [_vm._v("\n          Tags:\n        ")]), _vm._v(" "), _vm._l(_vm.tags, function (tag) {
     return _c("TagsCard", {
       key: tag.id,
       attrs: {
