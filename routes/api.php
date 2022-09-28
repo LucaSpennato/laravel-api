@@ -23,4 +23,6 @@ Route::namespace('Api')->group(function() {
     Route::get('/post/{id}', 'PostController@show');
     // ? in questo modo, se non sei autenticato, non ti permette di far nulla, anzi, ti porta nella pagina di login
     Route::middleware('auth:api')->delete('/post/{id}', 'PostController@destroy');
+
+    Route::get('/tags', 'TagController@index');
 });
